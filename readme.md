@@ -41,3 +41,15 @@ service like **ngrok**.
 3. Set `WEBHOOK_URL` to the HTTPS address from step 2.
 4. Run the bot as described above. Telegram will deliver updates to your
    local instance through the tunnel.
+
+## Deploying to Yandex Cloud Functions
+
+To run the bot as a serverless function:
+
+1. Create a Python runtime function in the Yandex Cloud console.
+2. Upload the code along with `requirements.txt`.
+3. Set the handler to `main.handler`.
+4. Set the environment variable `TELEGRAM_BOT_TOKEN` with your bot token.
+5. Configure an API gateway or trigger so Telegram sends updates to
+   `https://<gateway-address>/<TELEGRAM_BOT_TOKEN>`.
+6. Telegram will POST updates to the function and the bot will respond.
