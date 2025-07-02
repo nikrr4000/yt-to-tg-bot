@@ -20,10 +20,13 @@ if not WEBHOOK_URL:
     raise RuntimeError("WEBHOOK_URL environment variable not set")
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    await update.message.reply_text("Hello! I'm alive.")
+    if update.message:
+        await update.message.reply_text("Hello! I'm alive.")
 
 
 def main() -> None:
+    if (not TOKEN):    
+        raise Exception("NO TOKEN PROVIDED")
     application = ApplicationBuilder().token(TOKEN).build()
 
     application.add_handler(CommandHandler("start", start))
